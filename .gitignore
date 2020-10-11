@@ -1,0 +1,6 @@
+/venv/
+/.idea/
+/data_extracted/
+/data_transformed/
+/data_loaded/
+/images_loaded/
