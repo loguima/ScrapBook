@@ -14,7 +14,6 @@ IMAGE_URL = 9
 TO_SCRAP = "http://books.toscrape.com"
 
 # Data directories
-EXTRACT_DIR = "data_extracted"
-TRANSFORM_DIR = "data_transformed"
-LOAD_DIR = "data_loaded"
-IMAGES_DIR = "images_loaded"
+EXTRACT_DIR = "extracted"
+TRANSFORM_DIR = "transformed"
+LOAD_DIR = "loaded"
