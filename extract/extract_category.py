@@ -1,6 +1,6 @@
-import os
-from urllib.parse import urljoin
 
+
+from common.directory import Directory
 from extract.extract import Extract
 from extract.extract_product import ExtractProduct
 
@@ -8,25 +8,28 @@ from extract.extract_product import ExtractProduct
 class ExtractCategory(Extract):
     """ Extract contents of categories and browse the products """
 
-    def _extract(self):
-        """ Create category's directory. Browse products for all pages of the category """
-        os.makedirs(self._extract_dir, exist_ok=True)
+    def create_dir(self):
+        """ Create category's directory. """
+        self.extracted_dir = Directory(self.extracted_dir)
 
-        soup = self._soup
+    def browse(self):
+        """  Browse products for all pages of the category """
+
+        soup = self.soup
         loop = True
         while loop:
-            self._search_products(soup, self._extract_dir)
+            self.browse_current_page(soup)
             is_next = soup.select_one('li.next a')
             if is_next:
-                url_next = urljoin(self._url, is_next['href'])
-                soup = self._make_soup(url_next)
+                url_next = self.urlpath(is_next['href'])
+                soup = self.make_soup(url_next)
             else:
                 loop = False
 
-    def _search_products(self, soup, extract_dir):
-        """ Browse products for current page of the category """
+    def browse_current_page(self, soup):
+        """ Browse products from current page of the category """
         products = soup.select('div.image_container a')
-        for i, result in enumerate(products):
-            url_product = urljoin(self._url, result['href'])
-            ExtractProduct(url_product, extract_dir)
+        for result in products:
+            url_product = self.urlpath(result['href'])
+            ExtractProduct(url_product, self.extracted_dir.directory)
 

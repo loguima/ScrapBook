@@ -1,19 +1,23 @@
 # The elements to load
-TITLE = 0
-PRODUCT_PAGE_URL = 1
-UNIVERSAL_PRODUCT_CODE = 2
-CATEGORY = 3
-PRICE_INCLUDING_TAX = 4
-PRICE_EXCLUDING_TAX = 5
-NUMBER_AVAILABLE = 6
-PRODUCT_DESCRIPTION = 7
-REVIEW_RATING = 8
-IMAGE_URL = 9
+TITLE = "title"
+PRODUCT_PAGE_URL = "product_page_url"
+UNIVERSAL_PRODUCT_CODE = "universal_product_code"
+CATEGORY = "category"
+PRICE_INCLUDING_TAX = "price_including_tax"
+PRICE_EXCLUDING_TAX = "price_excluding_tax"
+NUMBER_AVAILABLE = "number_available"
+PRODUCT_DESCRIPTION = "product_description"
+REVIEW_RATING = "review_rating"
+IMAGE_URL = "image_url"
 
 # Site to scrap
-TO_SCRAP = "http://books.toscrape.com"
+URL_TO_SCRAP = "http://books.toscrape.com"
 
 # Data directories
-EXTRACT_DIR = "extracted"
-TRANSFORM_DIR = "transformed"
-LOAD_DIR = "loaded"
+EXTRACTED_DIR = "extracted"
+TRANSFORMED_DIR = "transformed"
+LOADED_DIR = "loaded"
+IMAGES_DIR = "images"
+
+# Separator used to transform url as file name
+SEPARATOR = '#_#'

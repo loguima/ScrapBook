@@ -1,11 +1,20 @@
 import os
-from urllib.request import urlretrieve
+import requests
+
+from common.constantes import SEPARATOR
 from extract.extract import Extract
 
 
 class ExtractProduct(Extract):
-    """ Extract contents of a product page """
+    """ Store product's page (same as book's page) """
 
-    def _extract(self):
-        extract_file = os.path.join(self._extract_dir, self._url.split('/')[4] + ".html")
-        urlretrieve(self._url, extract_file)
+    def extract(self):
+        extract_file = self.url.replace('/', SEPARATOR)  # Translate URL to give file name
+        extract_file = os.path.join(self.extracted_dir, extract_file)  # File in category's directory
+        r = requests.get(self.url)
+        r.encoding = 'utf-8'
+        contents = r.text
+
+        encoding = requests.get(self.url).encoding
+        with open(extract_file,"w",encoding='utf-8') as f:
+            f.write(contents)
