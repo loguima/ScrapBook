@@ -1,12 +1,12 @@
-from shutil import rmtree
+import json
+import re
 from os import listdir
 from urllib.parse import urljoin
-import re
-from bs4 import BeautifulSoup
-import json
 
-from common.directory import Directory
+from bs4 import BeautifulSoup
+
 from common.constantes import *
+from common.directory import Directory
 
 
 class Transform:
@@ -29,6 +29,7 @@ class Transform:
             category[category_name] = products
             category_extracted_dir = self.extracted_dir.path(category_name)
             for product_file in listdir(category_extracted_dir):
+                # Absolute path of the file
                 product_file = self.extracted_dir.path(category_extracted_dir, product_file)
                 products.append(self.transform_product(product_file, category_name))
 
@@ -54,6 +55,11 @@ class Transform:
         elements[IMAGE_URL] = urljoin(URL_TO_SCRAP, soup.find('img')['src'])
         elements[PRODUCT_DESCRIPTION] = soup.find_all('p')[3].get_text()
         star_rating = soup.find('p', attrs={'class': 'star-rating'}).attrs['class'][1]
-        elements[REVIEW_RATING] = self.rating[star_rating]
+        elements[REVIEW_RATING] = self.rating[star_rating]  # Transform star rating in ratio
 
         return elements
+
+
+if __name__ == '__main__':
+    Directory.chdir()
+    Transform(EXTRACTED_DIR, TRANSFORMED_DIR)

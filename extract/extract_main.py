@@ -1,4 +1,3 @@
-
 from common.directory import Directory
 from extract.extract import Extract
 from extract.extract_category import ExtractCategory

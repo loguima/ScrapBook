@@ -1,5 +1,3 @@
-
-
 from common.directory import Directory
 from extract.extract import Extract
 from extract.extract_product import ExtractProduct
@@ -32,4 +30,3 @@ class ExtractCategory(Extract):
         for result in products:
             url_product = self.urlpath(result['href'])
             ExtractProduct(url_product, self.extracted_dir.directory)
-

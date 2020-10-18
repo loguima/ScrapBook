@@ -1,4 +1,5 @@
 import os
+
 import requests
 
 from common.constantes import SEPARATOR
@@ -14,7 +15,5 @@ class ExtractProduct(Extract):
         r = requests.get(self.url)
         r.encoding = 'utf-8'
         contents = r.text
-
-        encoding = requests.get(self.url).encoding
-        with open(extract_file,"w",encoding='utf-8') as f:
+        with open(extract_file, "w", encoding='utf-8') as f:
             f.write(contents)
