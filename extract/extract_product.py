@@ -11,7 +11,8 @@ class ExtractProduct(Extract):
 
     def extract(self):
         extract_file = self.url.replace('/', SEPARATOR)  # Translate URL to give file name
-        extract_file = os.path.join(self.extracted_dir, extract_file)  # File in category's directory
+        extract_file = extract_file.replace('http:', '')  # ':' not allowed for Windows files system
+        extract_file = os.path.join(self.extracted_dir, extract_file)  # Absolute path of file in category's directory
         r = requests.get(self.url)
         r.encoding = 'utf-8'
         contents = r.text
